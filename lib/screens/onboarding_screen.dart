@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:investment_app/models/slide_model.dart';
 import 'package:investment_app/router/app_routes.dart';
 import 'package:investment_app/theme/app_branding_colors.dart';
-import 'package:investment_app/theme/app_colors.dart';
 import 'package:investment_app/widgets/buttons/app_button.dart';
 import 'package:investment_app/widgets/buttons/app_text_button.dart';
+import 'package:investment_app/widgets/slider/app_slider_content.dart';
 import 'package:investment_app/widgets/slider/app_slider_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -14,10 +15,22 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  static const List<String> images = [
-    'assets/images/online_shopping.png',
-    'assets/images/portable_investment.png',
-    'assets/images/digital_wallet.png',
+  List<SlideModel> slides = [
+    SlideModel(
+      'assets/images/online_shopping.png',
+      'Smart Investing',
+      'Explore tailored investment strategies that align with your financial goals. Our app demystifies complex market trends, offering easy-to-understand insights and tools. Make informed decisions and grow your wealth with confidence.',
+    ),
+    SlideModel(
+      'assets/images/portable_investment.png',
+      'Diverse Portfolio',
+      'Elevate your investment game by building a diversified portfolio with stocks, bonds, ETFs, and more. Our app provides expert insights and real-time analytics to help you balance risk and maximize returns, ensuring a healthier financial future.',
+    ),
+    SlideModel(
+      'assets/images/digital_wallet.png',
+      'Real-Time Analytics',
+      'Gain an edge with up-to-the-minute market data and in-depth analytics. Our app empowers you to make swift, informed investment decisions based on current financial trends, expert forecasts, and personalized recommendations.',
+    ),
   ];
 
   int activeIndex = 0;
@@ -69,8 +82,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         return FadeTransition(opacity: animation, child: child);
                       },
                       child: Image.asset(
-                        images[activeIndex],
-                        key: ValueKey<String>(images[activeIndex]),
+                        slides[activeIndex].image,
+                        key: ValueKey<String>(slides[activeIndex].image),
                       ),
                     ),
                   ),
@@ -92,19 +105,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ],
                 ),
                 const SizedBox(height: 27),
-                Text(
-                  'Title',
-                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                        color: AppColors.white,
-                      ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat ',
-                  textAlign: TextAlign.justify,
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        color: AppColors.white,
-                      ),
+                AppSliderContent(
+                  title: slides[activeIndex].title,
+                  content: slides[activeIndex].content,
                 ),
               ],
             ),
