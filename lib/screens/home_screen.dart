@@ -6,7 +6,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text('1'),
+      body: Center(child: Text('112312312321')),
     );
   }
 }

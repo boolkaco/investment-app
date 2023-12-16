@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:investment_app/router/app_routes.dart';
 import 'package:investment_app/theme/app_branding_colors.dart';
 import 'package:investment_app/theme/app_colors.dart';
 import 'package:investment_app/widgets/buttons/app_button.dart';
 import 'package:investment_app/widgets/buttons/app_text_button.dart';
 import 'package:investment_app/widgets/slider/app_slider_indicator.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  static const List<String> images = [
+    'assets/images/online_shopping.png',
+    'assets/images/portable_investment.png',
+    'assets/images/digital_wallet.png',
+  ];
+
+  int activeIndex = 0;
+
+  onClick() {
+    if (activeIndex == 2) {
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
+    } else {
+      setState(() {
+        activeIndex++;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +40,13 @@ class OnboardingScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor:
             Theme.of(context).extension<AppBrandingColors>()!.color,
-        actions: const [
-          AppTextButton(label: 'Skip'),
+        actions: [
+          AppTextButton(
+            label: 'Skip',
+            callback: () {
+              Navigator.pushReplacementNamed(context, AppRoutes.home);
+            },
+          ),
         ],
       ),
       body: Padding(
@@ -33,19 +62,33 @@ class OnboardingScreen extends StatelessWidget {
                       maxWidth: 360,
                       maxHeight: 360,
                     ),
-                    child: Image.asset('assets/images/online_shopping.png'),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 500),
+                      transitionBuilder:
+                          (Widget child, Animation<double> animation) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                      child: Image.asset(
+                        images[activeIndex],
+                        key: ValueKey<String>(images[activeIndex]),
+                      ),
+                    ),
                   ),
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppSliderIndicator(
-                      isActive: true,
+                      isActive: activeIndex == 0,
                     ),
-                    SizedBox(width: 8),
-                    AppSliderIndicator(),
-                    SizedBox(width: 8),
-                    AppSliderIndicator(),
+                    const SizedBox(width: 8),
+                    AppSliderIndicator(
+                      isActive: activeIndex == 1,
+                    ),
+                    const SizedBox(width: 8),
+                    AppSliderIndicator(
+                      isActive: activeIndex == 2,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 27),
@@ -65,12 +108,15 @@ class OnboardingScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 66),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 66),
               child: Row(
                 children: [
                   Expanded(
-                    child: AppButton(label: 'Next'),
+                    child: AppButton(
+                      label: activeIndex == 2 ? 'Let\'s go' : 'Next',
+                      callback: onClick,
+                    ),
                   ),
                 ],
               ),
