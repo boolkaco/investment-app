@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/screens/investment_screen.dart';
 import 'package:investment_app/theme/app_colors.dart';
 import 'package:investment_app/widgets/appbars/home_appbar.dart';
@@ -30,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   void _onItemTapped(int index) {
+    NavigationBloc navigationBloc = BlocProvider.of<NavigationBloc>(context);
+    navigationBloc.updateIsNestedRoute(false);
     setState(() {
       _selectedIndex = index;
     });

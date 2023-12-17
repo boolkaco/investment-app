@@ -30,7 +30,6 @@ class AppTheme {
             borderRadius: BorderRadius.circular(100),
             side: const BorderSide(color: AppColors.white, width: 1)
           ),
-          // padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
         ),
       ),
       useMaterial3: true,

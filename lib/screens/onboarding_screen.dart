@@ -117,6 +117,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   Expanded(
                     child: AppButton(
+                      isCustom: true,
                       label: activeIndex == 2 ? 'Let\'s go' : 'Next',
                       callback: onClick,
                     ),
