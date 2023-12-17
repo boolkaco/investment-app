@@ -57,7 +57,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 AppButton(
-                  label: 'To favorite',
+                  label: 'Add to favorite',
                   callback: _addToFavorite,
                 ),
               ],

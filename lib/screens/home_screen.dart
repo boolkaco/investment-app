@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/screens/favorite/favorite_screen.dart';
 import 'package:investment_app/screens/investment/investment_screen.dart';
+import 'package:investment_app/screens/profile/profile_screen.dart';
 import 'package:investment_app/theme/app_colors.dart';
 import 'package:investment_app/widgets/appbars/home_appbar.dart';
 import 'package:investment_app/widgets/bottom_navigation/bottom_navigation_item.dart';
@@ -17,16 +18,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
   static const List<Widget> _widgetOptions = <Widget>[
     InvestmentScreen(),
     FavoriteScreen(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -40,7 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HomeAppbar(),
+      appBar: HomeAppbar(
+        isProfile: _selectedIndex == 2,
+      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: _widgetOptions,

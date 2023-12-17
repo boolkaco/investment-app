@@ -81,7 +81,9 @@ class _FavoriteScreenState extends State<FavoriteScreen>
             },
           );
         } else {
-          return Text('hello');
+          return const Center(
+            child: Text('There are no posts here yet'),
+          );
         }
       },
     );

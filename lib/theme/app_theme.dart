@@ -10,6 +10,17 @@ class AppTheme {
       visualDensity: VisualDensity.adaptivePlatformDensity,
       colorScheme: ColorScheme.fromSeed(seedColor: AppColors.shamrock),
       primaryColor: AppColors.shamrock,
+      inputDecorationTheme: const InputDecorationTheme(
+        labelStyle: TextStyle(color: AppColors.silver),
+        fillColor: Colors.transparent,
+        filled: true,
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.shamrock),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.silver),
+        ),
+      ),
       textTheme: const TextTheme(
         headlineSmall: TextStyle(
           fontSize: 14,
