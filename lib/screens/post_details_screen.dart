@@ -5,19 +5,22 @@ import 'package:investment_app/models/post_model.dart';
 import 'package:investment_app/widgets/app_card.dart';
 import 'package:investment_app/widgets/buttons/app_button.dart';
 
-class InvestmentDetailsScreen extends StatefulWidget {
+class PostDetailsScreen extends StatefulWidget {
   final PostModel post;
+  final bool isFavorite;
 
-  const InvestmentDetailsScreen({
+  const PostDetailsScreen({
     super.key,
     required this.post,
+    this.isFavorite = false,
   });
 
   @override
-  State<InvestmentDetailsScreen> createState() => _InvestmentDetailsScreenState();
+  State<PostDetailsScreen> createState() =>
+      _PostDetailsScreenState();
 }
 
-class _InvestmentDetailsScreenState extends State<InvestmentDetailsScreen> {
+class _PostDetailsScreenState extends State<PostDetailsScreen> {
   void _addToFavorite() {
     FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
     favoriteBloc.addToFavorite(widget.post);
@@ -49,15 +52,16 @@ class _InvestmentDetailsScreenState extends State<InvestmentDetailsScreen> {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(height: 28),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              AppButton(
-                label: 'To favorite',
-                callback: _addToFavorite,
-              ),
-            ],
-          )
+          if (!widget.isFavorite)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                AppButton(
+                  label: 'To favorite',
+                  callback: _addToFavorite,
+                ),
+              ],
+            )
         ],
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/models/post_model.dart';
-import 'package:investment_app/screens/investment/investment_details_screen.dart';
+import 'package:investment_app/screens/post_details_screen.dart';
 import 'package:investment_app/widgets/app_card.dart';
 import 'package:investment_app/consts/posts.dart';
 
@@ -36,7 +36,7 @@ class _InvestmentScreenState extends State<InvestmentScreen>
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: state.isNestedRoute!
-              ? InvestmentDetailsScreen(
+              ? PostDetailsScreen(
                   post: posts[postIndex],
                 )
               : Column(
