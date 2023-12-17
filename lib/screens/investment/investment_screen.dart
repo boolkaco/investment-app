@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
-import 'package:investment_app/screens/investment_details_screen.dart';
+import 'package:investment_app/models/post_model.dart';
+import 'package:investment_app/screens/investment/investment_details_screen.dart';
 import 'package:investment_app/widgets/app_card.dart';
+import 'package:investment_app/consts/posts.dart';
 
 class InvestmentScreen extends StatefulWidget {
   const InvestmentScreen({super.key});
@@ -13,14 +15,15 @@ class InvestmentScreen extends StatefulWidget {
 
 class _InvestmentScreenState extends State<InvestmentScreen>
     with AutomaticKeepAliveClientMixin {
-  int imageIndex = 1;
+  int postIndex = 0;
+  List<PostModel> posts = Posts.items;
 
   void _toggleDetails(int index) {
     NavigationBloc navigationBloc = BlocProvider.of<NavigationBloc>(context);
     navigationBloc.updateIsNestedRoute(true);
 
     setState(() {
-      imageIndex = index;
+      postIndex = index;
     });
   }
 
@@ -34,8 +37,7 @@ class _InvestmentScreenState extends State<InvestmentScreen>
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: state.isNestedRoute!
               ? InvestmentDetailsScreen(
-                  title: 'Header',
-                  image: 'assets/images/picture_$imageIndex.png',
+                  post: posts[postIndex],
                 )
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,13 +53,13 @@ class _InvestmentScreenState extends State<InvestmentScreen>
                     const SizedBox(height: 12),
                     Expanded(
                       child: ListView.separated(
-                        itemCount: 4,
+                        itemCount: posts.length,
                         itemBuilder: (context, int index) {
                           return GestureDetector(
-                            onTap: () => _toggleDetails(index + 1),
+                            onTap: () => _toggleDetails(index),
                             child: AppCard(
-                              title: 'Header',
-                              image: 'assets/images/picture_${index + 1}.png',
+                              title: posts[index].title,
+                              image: posts[index].imageUrl,
                             ),
                           );
                         },

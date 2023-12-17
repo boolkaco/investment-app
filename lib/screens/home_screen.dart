@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
-import 'package:investment_app/screens/investment_screen.dart';
+import 'package:investment_app/screens/favorite/favorite_screen.dart';
+import 'package:investment_app/screens/investment/investment_screen.dart';
 import 'package:investment_app/theme/app_colors.dart';
 import 'package:investment_app/widgets/appbars/home_appbar.dart';
 import 'package:investment_app/widgets/bottom_navigation/bottom_navigation_item.dart';
@@ -21,10 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     InvestmentScreen(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    FavoriteScreen(),
     Text(
       'Index 2: School',
       style: optionStyle,

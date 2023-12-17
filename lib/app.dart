@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:investment_app/bloc/favorite/favorite_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/router/app_routes.dart';
 import 'package:investment_app/screens/home_screen.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<NavigationBloc>(create: (context) => NavigationBloc()),
+        BlocProvider<FavoriteBloc>(create: (context) => FavoriteBloc()),
       ],
       child: MaterialApp(
         title: 'Investment app',
