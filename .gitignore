@@ -41,3 +41,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+/lib/models/hive/profile_model.g.dart

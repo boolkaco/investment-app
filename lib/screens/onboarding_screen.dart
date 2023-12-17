@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:investment_app/bloc/profile/profile_bloc.dart';
 import 'package:investment_app/models/slide_model.dart';
 import 'package:investment_app/router/app_routes.dart';
 import 'package:investment_app/theme/app_branding_colors.dart';
@@ -37,6 +39,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   onClick() {
     if (activeIndex == 2) {
+      ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
+      profileBloc.updateData();
       Navigator.pushReplacementNamed(context, AppRoutes.home);
     } else {
       setState(() {
@@ -57,6 +61,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           AppTextButton(
             label: 'Skip',
             callback: () {
+              ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
+              profileBloc.updateData();
               Navigator.pushReplacementNamed(context, AppRoutes.home);
             },
           ),

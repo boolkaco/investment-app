@@ -14,3 +14,10 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Code Generation
+
+In this project, we use code generation for certain features, like Hive database models. To generate necessary files, run the following command:
+
+```bash
+flutter packages pub run build_runner build

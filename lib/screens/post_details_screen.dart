@@ -24,6 +24,9 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   void _addToFavorite() {
     FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
     favoriteBloc.addToFavorite(widget.post);
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Added to favorite'),
+    ));
   }
 
   @override

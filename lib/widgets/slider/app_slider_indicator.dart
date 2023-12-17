@@ -14,8 +14,8 @@ class AppSliderIndicator extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isActive
-              ? AppColors.activeSliderIndicator
-              : AppColors.sliderIndicator,
+              ? AppColors.chartreuseYellow
+              : AppColors.white,
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),

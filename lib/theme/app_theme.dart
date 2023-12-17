@@ -3,8 +3,6 @@ import 'package:investment_app/theme/app_colors.dart';
 import 'package:investment_app/theme/app_branding_colors.dart';
 
 class AppTheme {
-  static const Color splashBackground = AppColors.splashBackground;
-
   static ThemeData get lightTheme {
     return ThemeData(
       visualDensity: VisualDensity.adaptivePlatformDensity,

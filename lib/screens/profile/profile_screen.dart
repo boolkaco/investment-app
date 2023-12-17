@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
+import 'package:investment_app/bloc/profile/profile_bloc.dart';
 import 'package:investment_app/screens/profile/edit_profile_screen.dart';
 import 'package:investment_app/widgets/profile/profile_entry.dart';
 
@@ -18,40 +19,50 @@ class ProfileScreen extends StatelessWidget {
           } else {
             return Column(
               children: [
-                ListTile(
-                  contentPadding: const EdgeInsets.all(0),
-                  leading: const SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/person.png'),
-                    ),
-                  ),
-                  title: Text(
-                    'Josh Kameron',
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  subtitle: Text(
-                    '+38095-567-34-11',
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(
-                      Icons.edit,
-                      size: 22,
-                    ),
-                    onPressed: () {
-                      NavigationBloc navigationBloc =
-                      BlocProvider.of<NavigationBloc>(context);
-                      navigationBloc.updateIsNestedRoute(
-                        true,
-                        isEditProfile: true,
+                BlocBuilder<ProfileBloc, ProfileState>(
+                  builder: (context, profileState) {
+                    if (profileState.profileModel != null) {
+                      return ListTile(
+                        contentPadding: const EdgeInsets.all(0),
+                        leading: const SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(
+                              'assets/images/person.png',
+                            ),
+                          ),
+                        ),
+                        title: Text(
+                          '${profileState.profileModel!.name} ${profileState.profileModel!.surname}',
+                          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        subtitle: Text(
+                          profileState.profileModel!.phone,
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        trailing: IconButton(
+                          icon: const Icon(
+                            Icons.edit,
+                            size: 22,
+                          ),
+                          onPressed: () {
+                            NavigationBloc navigationBloc =
+                            BlocProvider.of<NavigationBloc>(context);
+                            navigationBloc.updateIsNestedRoute(
+                              true,
+                              isEditProfile: true,
+                            );
+                          },
+                        ),
                       );
-                    },
-                  ),
+                    } else {
+                      return Container();
+                    }
+                  },
                 ),
                 const SizedBox(height: 32),
                 Expanded(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
+import 'package:investment_app/bloc/profile/profile_bloc.dart';
 
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   final bool isProfile;
@@ -72,15 +73,23 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                         radius: 15,
                       ),
                       const SizedBox(width: 8),
-                      Text(
-                        'Josh Kameron',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .copyWith(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
+                      BlocBuilder<ProfileBloc, ProfileState>(
+                        builder: (context, profileState) {
+                          if (profileState.profileModel != null) {
+                            return Text(
+                              '${profileState.profileModel!.name} ${profileState.profileModel!.surname}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium!
+                                  .copyWith(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
                       )
                     ],
                   ),
