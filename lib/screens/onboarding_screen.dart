@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/profile/profile_bloc.dart';
@@ -20,18 +21,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   List<SlideModel> slides = [
     SlideModel(
       'assets/images/online_shopping.png',
-      'Smart Investing',
-      'Explore tailored investment strategies that align with your financial goals. Our app demystifies complex market trends, offering easy-to-understand insights and tools. Make informed decisions and grow your wealth with confidence.',
+      tr('smart_investing'),
+      tr('smart_investing_desc'),
     ),
     SlideModel(
       'assets/images/portable_investment.png',
-      'Diverse Portfolio',
-      'Elevate your investment game by building a diversified portfolio with stocks, bonds, ETFs, and more. Our app provides expert insights and real-time analytics to help you balance risk and maximize returns, ensuring a healthier financial future.',
+      tr('portfolio'),
+      tr('portfolio_desc'),
     ),
     SlideModel(
       'assets/images/digital_wallet.png',
-      'Real-Time Analytics',
-      'Gain an edge with up-to-the-minute market data and in-depth analytics. Our app empowers you to make swift, informed investment decisions based on current financial trends, expert forecasts, and personalized recommendations.',
+      tr('analytics'),
+      tr('analytics_desc'),
     ),
   ];
 
@@ -59,7 +60,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Theme.of(context).extension<AppBrandingColors>()!.color,
         actions: [
           AppTextButton(
-            label: 'Skip',
+            label: tr('skip'),
             callback: () {
               ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
               profileBloc.updateData();
@@ -124,7 +125,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Expanded(
                     child: AppButton(
                       isCustom: true,
-                      label: activeIndex == 2 ? 'Let\'s go' : 'Next',
+                      label: activeIndex == 2 ? tr('letsgo') : tr('next'),
                       callback: onClick,
                     ),
                   ),

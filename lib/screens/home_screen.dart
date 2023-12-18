@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
@@ -18,11 +19,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    InvestmentScreen(),
-    FavoriteScreen(),
-    ProfileScreen(),
-  ];
+  late List<Widget> _widgetOptions;
+
+  void _updateLanguage() {
+    setState(() {});
+  }
 
   void _onItemTapped(int index) {
     NavigationBloc navigationBloc = BlocProvider.of<NavigationBloc>(context);
@@ -30,6 +31,18 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _widgetOptions = <Widget>[
+      const InvestmentScreen(),
+      const FavoriteScreen(),
+      ProfileScreen(
+        callback: _updateLanguage,
+      ),
+    ];
   }
 
   @override
@@ -46,19 +59,19 @@ class _HomeScreenState extends State<HomeScreen> {
         items: <BottomNavigationBarItem>[
           BottomNavigationItem.createItem(
             Icons.home,
-            'Home',
+            tr('home'),
             _selectedIndex == 0,
             context,
           ),
           BottomNavigationItem.createItem(
             Icons.favorite,
-            'Favorite',
+            tr('favorite'),
             _selectedIndex == 1,
             context,
           ),
           BottomNavigationItem.createItem(
             Icons.account_circle_rounded,
-            'Profile',
+            tr('profile'),
             _selectedIndex == 2,
             context,
           ),

@@ -1,13 +1,22 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/bloc/profile/profile_bloc.dart';
 import 'package:investment_app/screens/profile/edit_profile_screen.dart';
+import 'package:investment_app/screens/settings/settings_screen.dart';
 import 'package:investment_app/widgets/profile/profile_entry.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProfileScreen extends StatefulWidget {
+  final Function() callback;
 
+  const ProfileScreen({super.key, required this.callback});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -67,22 +76,38 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 32),
                 Expanded(
                   child: ListView(
-                    children: const [
+                    children: [
                       ProfileEntry(
                         icon: Icons.person,
-                        title: 'User profile',
+                        title: tr('user_profile'),
+                        callback: () {},
                       ),
                       ProfileEntry(
                         icon: Icons.settings,
-                        title: 'Settings',
+                        title: tr('settings'),
+                        callback: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SettingsScreen(
+                                callback: () {
+                                  setState(() {});
+                                  widget.callback();
+                                },
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       ProfileEntry(
                         icon: Icons.notifications,
-                        title: 'Notifications',
+                        title: tr('notifications'),
+                        callback: () {},
                       ),
                       ProfileEntry(
                         icon: Icons.help,
-                        title: 'Help and support',
+                        title: tr('help'),
+                        callback: () {},
                       ),
                     ],
                   ),

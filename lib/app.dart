@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/favorite/favorite_bloc.dart';
@@ -23,6 +24,9 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: 'Investment app',
         theme: AppTheme.lightTheme,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         routes: {
           AppRoutes.home: (context) => const HomeScreen(),
           AppRoutes.splash: (context) => const SplashScreen(),

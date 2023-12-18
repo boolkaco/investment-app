@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/favorite/favorite_bloc.dart';
@@ -24,8 +25,8 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   void _addToFavorite() {
     FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
     favoriteBloc.addToFavorite(widget.post);
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Added to favorite'),
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: const Text('added_to_favorite').tr(),
     ));
   }
 
@@ -60,7 +61,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 AppButton(
-                  label: 'Add to favorite',
+                  label: tr('add_to_favorite'),
                   callback: _addToFavorite,
                 ),
               ],

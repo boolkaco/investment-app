@@ -4,16 +4,19 @@ import 'package:investment_app/theme/app_colors.dart';
 class ProfileEntry extends StatelessWidget {
   final IconData icon;
   final String title;
+  final Function() callback;
 
   const ProfileEntry({
     super.key,
     required this.icon,
     required this.title,
+    required this.callback,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: callback,
       contentPadding: const EdgeInsets.all(0),
       title: Text(
         title,

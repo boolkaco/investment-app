@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/favorite/favorite_bloc.dart';
@@ -47,7 +48,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                         children: [
                           const SizedBox(height: 12),
                           Text(
-                            'Favorite',
+                            tr('favorite'),
                             textAlign: TextAlign.left,
                             style: Theme.of(context)
                                 .textTheme
@@ -81,8 +82,8 @@ class _FavoriteScreenState extends State<FavoriteScreen>
             },
           );
         } else {
-          return const Center(
-            child: Text('There are no posts here yet'),
+          return Center(
+            child: Text(context.tr('empty_favorite')),
           );
         }
       },

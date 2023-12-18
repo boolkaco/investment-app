@@ -17,6 +17,7 @@ class AppSliderContent extends StatelessWidget {
       children: [
         Text(
           title,
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                 color: AppColors.white,
               ),

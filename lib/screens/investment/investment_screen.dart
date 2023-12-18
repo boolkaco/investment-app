@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
@@ -44,7 +45,7 @@ class _InvestmentScreenState extends State<InvestmentScreen>
                   children: [
                     const SizedBox(height: 12),
                     Text(
-                      'Investment',
+                      tr('investment'),
                       textAlign: TextAlign.left,
                       style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                         fontWeight: FontWeight.w500,

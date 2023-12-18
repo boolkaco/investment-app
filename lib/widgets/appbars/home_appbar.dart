@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/bloc/profile/profile_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   final bool isProfile;
@@ -31,7 +32,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 if (state.isEditProfile!)
                   Text(
-                    'Edit profile',
+                    tr('user_profile'),
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium!
@@ -55,7 +56,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'User profile',
+                    tr('user_profile'),
                     style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                           fontWeight: FontWeight.w600,
                         ),

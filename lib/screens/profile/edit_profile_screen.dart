@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/profile/profile_bloc.dart';
@@ -58,9 +59,9 @@ class EditProfileScreen extends StatelessWidget {
                   children: [
                     TextField(
                       controller: nameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Name',
-                        contentPadding: EdgeInsets.symmetric(
+                      decoration: InputDecoration(
+                        labelText: tr('name'),
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: 20,
                         ),
                       ),
@@ -71,9 +72,9 @@ class EditProfileScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     TextField(
                       controller: surnameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Surname',
-                        contentPadding: EdgeInsets.symmetric(
+                      decoration: InputDecoration(
+                        labelText: tr('surname'),
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: 20,
                         ),
                       ),
@@ -84,9 +85,9 @@ class EditProfileScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     TextField(
                       controller: phoneController,
-                      decoration: const InputDecoration(
-                        labelText: 'Phone number',
-                        contentPadding: EdgeInsets.symmetric(
+                      decoration: InputDecoration(
+                        labelText: tr('phone'),
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: 20,
                         ),
                       ),
@@ -97,9 +98,9 @@ class EditProfileScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     TextField(
                       controller: emailController,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        contentPadding: EdgeInsets.symmetric(
+                      decoration: InputDecoration(
+                        labelText: tr('email'),
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: 20,
                         ),
                       ),
@@ -120,11 +121,11 @@ class EditProfileScreen extends StatelessWidget {
                     phone: phoneController.text,
                     email: emailController.text,
                   );
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Success'),
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: const Text('success').tr(),
                   ));
                 },
-                label: 'Save',
+                label: tr('save'),
               ),
             ],
           ),
