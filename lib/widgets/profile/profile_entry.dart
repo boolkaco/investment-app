@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:investment_app/theme/app_colors.dart';
 
 class ProfileEntry extends StatelessWidget {
   final IconData icon;
@@ -27,13 +26,13 @@ class ProfileEntry extends StatelessWidget {
       ),
       leading: Icon(
         icon,
-        color: AppColors.black,
         size: 20,
+        color: Theme.of(context).iconTheme.color,
       ),
-      trailing: const Icon(
+      trailing: Icon(
         Icons.keyboard_arrow_right,
         size: 20,
-        color: AppColors.black,
+        color: Theme.of(context).iconTheme.color,
       ),
     );
   }

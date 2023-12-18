@@ -5,7 +5,6 @@ import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/screens/favorite/favorite_screen.dart';
 import 'package:investment_app/screens/investment/investment_screen.dart';
 import 'package:investment_app/screens/profile/profile_screen.dart';
-import 'package:investment_app/theme/app_colors.dart';
 import 'package:investment_app/widgets/appbars/home_appbar.dart';
 import 'package:investment_app/widgets/bottom_navigation/bottom_navigation_item.dart';
 
@@ -77,8 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.shamrock,
-        unselectedItemColor: AppColors.black,
         onTap: _onItemTapped,
       ),
     );

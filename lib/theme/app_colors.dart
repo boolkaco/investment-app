@@ -6,4 +6,5 @@ class AppColors {
   static const shamrock = Color(0xFF3AC99B);
   static const chartreuseYellow = Color(0xFFDBF301);
   static const silver = Color(0xFFBDBDBD);
+  static const codGray = Color(0xFF121212);
 }

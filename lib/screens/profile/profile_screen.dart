@@ -54,9 +54,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         trailing: IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.edit,
                             size: 22,
+                            color: Theme.of(context).iconTheme.color,
                           ),
                           onPressed: () {
                             NavigationBloc navigationBloc =

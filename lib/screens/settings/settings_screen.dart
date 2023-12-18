@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:investment_app/utils/theme_notifier.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   final Function() callback;
@@ -14,6 +16,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool isDarkTheme = false;
 
   void _toggleTheme(bool value) {
+    Provider.of<ThemeNotifier>(context, listen: false).switchTheme();
     setState(() {
       isDarkTheme = value;
     });
@@ -28,6 +31,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            size: 20,
+            color: Theme.of(context).iconTheme.color,
+          ),
+        ),
         title: Text(
           tr('settings'),
           style: Theme.of(context)
@@ -41,31 +54,43 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           children: [
             ListTile(
-              title: const Text('dark_theme').tr(),
+              title: Text(
+                'dark_theme',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ).tr(),
               trailing: Switch(
                 value: isDarkTheme,
                 onChanged: _toggleTheme,
               ),
             ),
-            const Divider(),
+            Divider(
+              color: Theme.of(context).dividerColor,
+            ),
             ListTile(
-              title: const Text('eng').tr(),
+              title: Text(
+                'eng',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ).tr(),
               trailing: Radio(
                 value: 'en',
                 groupValue: context.locale.languageCode,
                 onChanged: (String? value) => _changeLanguage(value!),
               ),
             ),
-            const Divider(),
+            Divider(
+              color: Theme.of(context).dividerColor,
+            ),
             ListTile(
-              title: const Text('rus').tr(),
+              title: Text(
+                'rus',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ).tr(),
               trailing: Radio(
                 value: 'ru',
                 groupValue: context.locale.languageCode,
                 onChanged: (String? value) => _changeLanguage(value!),
               ),
             ),
-            const Divider(),
           ],
         ),
       ),

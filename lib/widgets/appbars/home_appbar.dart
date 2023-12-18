@@ -25,9 +25,10 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                         BlocProvider.of<NavigationBloc>(context);
                     navigationBloc.updateIsNestedRoute(false);
                   },
-                  child: const Icon(
+                  child: Icon(
                     Icons.arrow_back,
                     size: 20,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                 ),
                 if (state.isEditProfile!)
@@ -39,14 +40,16 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                         .copyWith(fontSize: 22),
                   ),
                 if (state.isEditProfile!)
-                  const Icon(
+                  Icon(
                     Icons.exit_to_app,
                     size: 20,
+                    color: Theme.of(context).iconTheme.color,
                   )
                 else
-                  const Icon(
+                  Icon(
                     Icons.share,
                     size: 20,
+                    color: Theme.of(context).iconTheme.color,
                   ),
               ],
             );
@@ -94,16 +97,18 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                       )
                     ],
                   ),
-                  const Row(
+                  Row(
                     children: [
                       Icon(
                         Icons.search,
                         size: 20,
+                        color: Theme.of(context).iconTheme.color,
                       ),
-                      SizedBox(width: 15),
+                      const SizedBox(width: 15),
                       Icon(
                         Icons.info_outline_rounded,
                         size: 20,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                     ],
                   )

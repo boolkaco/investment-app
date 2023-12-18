@@ -83,7 +83,10 @@ class _FavoriteScreenState extends State<FavoriteScreen>
           );
         } else {
           return Center(
-            child: Text(context.tr('empty_favorite')),
+            child: Text(
+              context.tr('empty_favorite'),
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           );
         }
       },

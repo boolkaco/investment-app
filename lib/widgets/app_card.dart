@@ -45,6 +45,7 @@ class AppCard extends StatelessWidget {
                       style:
                           Theme.of(context).textTheme.headlineMedium!.copyWith(
                             fontWeight: FontWeight.w500,
+                            color: AppColors.black,
                           ),
                     ),
                   ),

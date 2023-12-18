@@ -8,31 +8,42 @@ import 'package:investment_app/router/app_routes.dart';
 import 'package:investment_app/screens/home_screen.dart';
 import 'package:investment_app/screens/onboarding_screen.dart';
 import 'package:investment_app/screens/splash_screen.dart';
-import 'package:investment_app/theme/app_theme.dart';
+import 'package:investment_app/utils/theme_notifier.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ThemeNotifier()),
         BlocProvider<NavigationBloc>(create: (context) => NavigationBloc()),
         BlocProvider<FavoriteBloc>(create: (context) => FavoriteBloc()),
         BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
       ],
-      child: MaterialApp(
-        title: 'Investment app',
-        theme: AppTheme.lightTheme,
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        routes: {
-          AppRoutes.home: (context) => const HomeScreen(),
-          AppRoutes.splash: (context) => const SplashScreen(),
-          AppRoutes.onboarding: (context) => const OnboardingScreen(),
+      child: Consumer<ThemeNotifier>(
+        builder: (context, themeNotifier, child) {
+          print(themeNotifier.currentTheme.primaryColor);
+          return Builder(
+            builder: (context) {
+              return MaterialApp(
+                title: 'Investment app',
+                theme: themeNotifier.currentTheme,
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                routes: {
+                  AppRoutes.home: (context) => const HomeScreen(),
+                  AppRoutes.splash: (context) => const SplashScreen(),
+                  AppRoutes.onboarding: (context) => const OnboardingScreen(),
+                },
+                initialRoute: AppRoutes.splash,
+              );
+            },
+          );
         },
-        initialRoute: AppRoutes.splash,
       ),
     );
   }
