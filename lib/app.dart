@@ -25,7 +25,6 @@ class App extends StatelessWidget {
       ],
       child: Consumer<ThemeNotifier>(
         builder: (context, themeNotifier, child) {
-          print(themeNotifier.currentTheme.primaryColor);
           return Builder(
             builder: (context) {
               return MaterialApp(

@@ -13,18 +13,25 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool isDarkTheme = false;
+  late AppThemeType appThemeType;
 
   void _toggleTheme(bool value) {
     Provider.of<ThemeNotifier>(context, listen: false).switchTheme();
     setState(() {
-      isDarkTheme = value;
+      appThemeType =
+          Provider.of<ThemeNotifier>(context, listen: false).currentThemeType;
     });
   }
 
   void _changeLanguage(String languageCode) {
     context.setLocale(Locale(languageCode));
     widget.callback();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    appThemeType = Provider.of<ThemeNotifier>(context, listen: false).currentThemeType;
   }
 
   @override
@@ -59,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: Theme.of(context).textTheme.headlineMedium,
               ).tr(),
               trailing: Switch(
-                value: isDarkTheme,
+                value: appThemeType == AppThemeType.dark,
                 onChanged: _toggleTheme,
               ),
             ),

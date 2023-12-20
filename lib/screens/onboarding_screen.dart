@@ -79,8 +79,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Center(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(
-                      maxWidth: 360,
-                      maxHeight: 360,
+                      maxWidth: 340,
+                      maxHeight: 340,
                     ),
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 500),

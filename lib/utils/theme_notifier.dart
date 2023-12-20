@@ -12,6 +12,8 @@ class ThemeNotifier with ChangeNotifier {
         : AppTheme.darkTheme;
   }
 
+  AppThemeType get currentThemeType => _currentThemeType;
+
   void switchTheme() {
     _currentThemeType = _currentThemeType == AppThemeType.light
         ? AppThemeType.dark

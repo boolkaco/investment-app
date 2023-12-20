@@ -101,11 +101,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       ProfileEntry(
-                        icon: Icons.notifications,
-                        title: tr('notifications'),
-                        callback: () {},
-                      ),
-                      ProfileEntry(
                         icon: Icons.help,
                         title: tr('help'),
                         callback: () {},

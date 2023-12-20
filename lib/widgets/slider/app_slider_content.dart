@@ -13,6 +13,17 @@ class AppSliderContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+
+    var textStyle = (screenSize.width < 400)
+        ? Theme.of(context).textTheme.headlineMedium!.copyWith(
+              color: AppColors.white,
+              fontSize: 14,
+            )
+        : Theme.of(context).textTheme.headlineMedium!.copyWith(
+              color: AppColors.white,
+            );
+
     return Column(
       children: [
         Text(
@@ -26,9 +37,7 @@ class AppSliderContent extends StatelessWidget {
         Text(
           content,
           textAlign: TextAlign.justify,
-          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                color: AppColors.white,
-              ),
+          style: textStyle,
         ),
       ],
     );

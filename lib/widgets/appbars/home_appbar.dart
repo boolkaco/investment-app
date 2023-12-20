@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/bloc/profile/profile_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:investment_app/router/app_routes.dart';
 
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   final bool isProfile;
@@ -40,10 +44,26 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                         .copyWith(fontSize: 22),
                   ),
                 if (state.isEditProfile!)
-                  Icon(
-                    Icons.exit_to_app,
-                    size: 20,
-                    color: Theme.of(context).iconTheme.color,
+                  GestureDetector(
+                    onTap: () {
+                      try {
+                        if (Platform.isAndroid) {
+                          SystemNavigator.pop();
+                        } else if (Platform.isIOS) {
+                          exit(0);
+                        }
+                      } catch (err) {
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutes.onboarding,
+                        );
+                      }
+                    },
+                    child: Icon(
+                      Icons.exit_to_app,
+                      size: 20,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   )
                 else
                   Icon(
