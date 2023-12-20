@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: HomeAppbar(
         isProfile: _selectedIndex == 2,
+        isFavorite: _selectedIndex == 1,
       ),
       body: IndexedStack(
         index: _selectedIndex,

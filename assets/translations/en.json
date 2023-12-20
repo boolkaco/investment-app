@@ -28,5 +28,7 @@
   "success": "Success",
   "dark_theme": "Dark theme",
   "eng": "English",
-  "rus": "Russian"
+  "rus": "Russian",
+  "search": "Search...",
+  "empty_search": "Nothing found. Please try other keywords."
 }

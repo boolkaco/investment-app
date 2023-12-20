@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:investment_app/bloc/favorite/favorite_bloc.dart';
+import 'package:investment_app/bloc/favorite/strategy_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/bloc/profile/profile_bloc.dart';
 import 'package:investment_app/router/app_routes.dart';
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeNotifier()),
         BlocProvider<NavigationBloc>(create: (context) => NavigationBloc()),
-        BlocProvider<FavoriteBloc>(create: (context) => FavoriteBloc()),
+        BlocProvider<StrategyBloc>(create: (context) => StrategyBloc()),
         BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
       ],
       child: Consumer<ThemeNotifier>(

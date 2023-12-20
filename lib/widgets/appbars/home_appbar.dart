@@ -3,15 +3,38 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:investment_app/bloc/favorite/strategy_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/bloc/profile/profile_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:investment_app/router/app_routes.dart';
 
-class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
+class HomeAppbar extends StatefulWidget implements PreferredSizeWidget {
   final bool isProfile;
+  final bool isFavorite;
 
-  const HomeAppbar({super.key, this.isProfile = false});
+  const HomeAppbar({
+    super.key,
+    this.isProfile = false,
+    this.isFavorite = false,
+  });
+
+  @override
+  State<HomeAppbar> createState() => _HomeAppbarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class _HomeAppbarState extends State<HomeAppbar> {
+  TextEditingController searchController = TextEditingController();
+  bool isShowSearchField = false;
+
+  void onShowSearchField() {
+    setState(() {
+      isShowSearchField = !isShowSearchField;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +97,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
               ],
             );
           } else {
-            if (isProfile) {
+            if (widget.isProfile) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -87,53 +110,89 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               );
             } else {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/person.png'),
-                        radius: 15,
-                      ),
-                      const SizedBox(width: 8),
-                      BlocBuilder<ProfileBloc, ProfileState>(
-                        builder: (context, profileState) {
-                          if (profileState.profileModel != null) {
-                            return Text(
-                              '${profileState.profileModel!.name} ${profileState.profileModel!.surname}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .copyWith(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            );
-                          } else {
-                            return Container();
-                          }
+              if (isShowSearchField) {
+                return Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: searchController,
+                        onChanged: (searchText) {
+                          context.read<StrategyBloc>().onSearch(
+                            searchText,
+                            isFavorite: widget.isFavorite,
+                          );
                         },
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.search,
-                        size: 20,
-                        color: Theme.of(context).iconTheme.color,
+                        decoration: InputDecoration(
+                          hintText: tr('search'),
+                          border: InputBorder.none,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              onShowSearchField();
+                              context.read<StrategyBloc>().clearSearchTarget();
+                            },
+                            icon: const Icon(
+                              Icons.close,
+                              size: 20,
+                            ),
+                          ),
+                        ),
                       ),
-                      const SizedBox(width: 15),
-                      Icon(
-                        Icons.info_outline_rounded,
-                        size: 20,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                    ],
-                  )
-                ],
-              );
+                    ),
+                  ],
+                );
+              } else {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/images/person.png'),
+                          radius: 15,
+                        ),
+                        const SizedBox(width: 8),
+                        BlocBuilder<ProfileBloc, ProfileState>(
+                          builder: (context, profileState) {
+                            if (profileState.profileModel != null) {
+                              return Text(
+                                '${profileState.profileModel!.name} ${profileState.profileModel!.surname}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: onShowSearchField,
+                          icon: Icon(
+                            Icons.search,
+                            size: 20,
+                            color: Theme.of(context).iconTheme.color,
+                          ),
+                        ),
+                        const SizedBox(width: 15),
+                        Icon(
+                          Icons.info_outline_rounded,
+                          size: 20,
+                          color: Theme.of(context).iconTheme.color,
+                        ),
+                      ],
+                    )
+                  ],
+                );
+              }
             }
           }
         },
@@ -141,7 +200,4 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

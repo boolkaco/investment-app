@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:investment_app/bloc/favorite/favorite_bloc.dart';
+import 'package:investment_app/bloc/favorite/strategy_bloc.dart';
 import 'package:investment_app/bloc/navigation/navigation_bloc.dart';
 import 'package:investment_app/models/post_model.dart';
 import 'package:investment_app/screens/post_details_screen.dart';
@@ -31,16 +31,19 @@ class _FavoriteScreenState extends State<FavoriteScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoriteBloc, FavoriteState>(
-      builder: (context, state) {
-        if (state.posts.isNotEmpty) {
+    return BlocBuilder<StrategyBloc, StrategyState>(
+      builder: (context, strategyState) {
+        final posts = strategyState.searchTarget.isEmpty
+            ? strategyState.favoritePosts
+            : strategyState.posts;
+        if (posts.isNotEmpty) {
           return BlocBuilder<NavigationBloc, NavigationState>(
             builder: (context, navState) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: navState.isNestedRoute!
                     ? PostDetailsScreen(
-                        post: state.posts[postIndex],
+                        post: posts[postIndex],
                         isFavorite: true,
                       )
                     : Column(
@@ -60,13 +63,13 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                           const SizedBox(height: 12),
                           Expanded(
                             child: ListView.separated(
-                              itemCount: state.posts.length,
+                              itemCount: posts.length,
                               itemBuilder: (context, int index) {
                                 return GestureDetector(
                                   onTap: () => _toggleDetails(index),
                                   child: AppCard(
-                                    title: state.posts[index].title,
-                                    image: state.posts[index].imageUrl,
+                                    title: posts[index].title,
+                                    image: posts[index].imageUrl,
                                     isFavorite: true,
                                   ),
                                 );

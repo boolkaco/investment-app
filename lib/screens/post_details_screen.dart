@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:investment_app/bloc/favorite/favorite_bloc.dart';
+import 'package:investment_app/bloc/favorite/strategy_bloc.dart';
 import 'package:investment_app/models/post_model.dart';
 import 'package:investment_app/widgets/app_card.dart';
 import 'package:investment_app/widgets/buttons/app_button.dart';
@@ -23,8 +23,8 @@ class PostDetailsScreen extends StatefulWidget {
 
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
   void _addToFavorite() {
-    FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
-    favoriteBloc.addToFavorite(widget.post);
+    StrategyBloc strategyBloc = BlocProvider.of<StrategyBloc>(context);
+    strategyBloc.addToFavorite(widget.post);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: const Text('added_to_favorite').tr(),
     ));
