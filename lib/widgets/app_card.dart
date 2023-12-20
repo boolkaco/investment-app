@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:investment_app/bloc/favorite/strategy_bloc.dart';
 import 'package:investment_app/theme/app_colors.dart';
 
 class AppCard extends StatelessWidget {
@@ -12,6 +14,10 @@ class AppCard extends StatelessWidget {
     required this.image,
     this.isFavorite = false,
   });
+
+  void _onPressFavorite(BuildContext context) {
+    context.read<StrategyBloc>().removeFromFavorite(title);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +58,16 @@ class AppCard extends StatelessWidget {
                 ),
 
           if (isFavorite)
-            const Positioned(
+            Positioned(
               top: 20,
               right: 20,
-              child: Icon(
-                Icons.favorite,
-                size: 22,
-                color: AppColors.white,
+              child: IconButton(
+                onPressed: () => _onPressFavorite(context),
+                icon: const Icon(
+                  Icons.favorite,
+                  size: 22,
+                  color: AppColors.white,
+                ),
               ),
             ),
         ],

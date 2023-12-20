@@ -38,4 +38,15 @@ class StrategyBloc extends Cubit<StrategyState> {
       allPosts: state.allPosts,
     ));
   }
+
+  void removeFromFavorite(String title) {
+    final favoritePosts = List<PostModel>.from(state.favoritePosts)
+      ..removeWhere((post) => post.title == title);
+    emit(state.copyWith(
+      posts: state.posts,
+      searchTarget: state.searchTarget,
+      favoritePosts: favoritePosts,
+      allPosts: state.allPosts,
+    ));
+  }
 }
