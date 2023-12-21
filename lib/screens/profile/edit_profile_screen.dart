@@ -1,17 +1,37 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:investment_app/bloc/profile/profile_bloc.dart';
 import 'package:investment_app/theme/app_colors.dart';
 import 'package:investment_app/widgets/buttons/app_button.dart';
 
-class EditProfileScreen extends StatelessWidget {
-  EditProfileScreen({super.key});
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
 
+  @override
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  File? _imageFile;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+
+  Future<void> _pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _imageFile = File(image.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,24 +49,29 @@ class EditProfileScreen extends StatelessWidget {
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/images/person.png'),
+                    backgroundImage: _imageFile != null
+                        ? FileImage(_imageFile!) as ImageProvider<Object>
+                        : const AssetImage('assets/images/person.png'),
                   ),
                   Positioned(
                     bottom: 0,
                     right: 0,
-                    child: Container(
-                      width: 24,
-                      height: 24,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppColors.shamrock,
-                      ),
-                      child: const Icon(
-                        Icons.camera_alt,
-                        color: AppColors.black,
-                        size: 14,
+                    child: GestureDetector(
+                      onTap: _pickImage,
+                      child: Container(
+                        width: 24,
+                        height: 24,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: AppColors.shamrock,
+                        ),
+                        child: const Icon(
+                          Icons.camera_alt,
+                          color: AppColors.black,
+                          size: 14,
+                        ),
                       ),
                     ),
                   ),
